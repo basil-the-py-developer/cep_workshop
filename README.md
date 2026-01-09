@@ -51,7 +51,7 @@ The generated code should clearly show:
 
 
 	How a response is sent back to the frontend
-	get  basic single frontend code
+	
 also write a basic single html code and the project structure 
 ```
 
