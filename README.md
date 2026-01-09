@@ -33,6 +33,7 @@ Requirements:
 	Use Flask
 
 	Use render_template() to serve an HTML page from the templates folder
+	dont use any env variables 
 
 Sends the input to the Gemini 2.5 Flash model
 
@@ -49,7 +50,7 @@ The generated code should clearly show:
 	How the AI model is called
 
 	How a response is sent back to the frontend
-
+	get  basic single frontend code
 also write a basic frontend code and the project structure 
 ```
 
