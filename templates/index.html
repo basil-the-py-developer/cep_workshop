@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>StudyMate AI – Basic Chatbot</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f7fa;
+            margin: 0;
+        }
+
+        header {
+            background-color: #ffffff;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ccc;
+        }
+
+        header h1 {
+            font-size: 20px;
+            margin: 0;
+        }
+
+        header img {
+            height: 50px;
+        }
+
+        main {
+            max-width: 700px;
+            margin: 40px auto;
+            background-color: white;
+            padding: 25px;
+            border-radius: 6px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            font-size: 15px;
+            margin-bottom: 15px;
+        }
+
+        button {
+            padding: 10px 18px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        #aiResponse {
+            margin-top: 15px;
+            padding: 12px;
+            background-color: #f0f2f5;
+            min-height: 120px;
+            border-radius: 5px;
+            font-size: 15px;
+        }
+
+        h3 {
+            margin-top: 10px;
+        }
+
+        ul {
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>StudyMate AI – Basic Chatbot</h1>
+    <img src="https://cep.ac.in/images/logo.png" alt="College of Engineering Poonjar Logo">
+</header>
+
+<main>
+    <label for="userInput">Your Question</label>
+    <input type="text" id="userInput" placeholder="Enter a mathematics question">
+
+    <button id="sendBtn">Send</button>
+
+    <label>AI Response</label>
+    <div id="aiResponse"></div>
+</main>
+
+<script>
+document.getElementById("sendBtn").addEventListener("click", function () {
+
+    const userInput = document.getElementById("userInput").value.trim();
+    const responseBox = document.getElementById("aiResponse");
+
+    if (userInput === "") {
+        responseBox.innerHTML = "<p>Please enter a question.</p>";
+        return;
+    }
+
+    fetch("/chat", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ message: userInput })
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Render formatted HTML
+        responseBox.innerHTML = data.reply;
+    })
+    .catch(() => {
+        responseBox.innerHTML = "<p>Error connecting to server.</p>";
+    });
+
+    document.getElementById("userInput").value = "";
+});
+</script>
+
+</body>
+</html>
